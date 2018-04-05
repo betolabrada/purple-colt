@@ -31,6 +31,9 @@ public class Deduccion extends Persona{
 		else if(this.nivelEscolar.equalsIgnoreCase("preparatoria")) {
 			this.maxDeducirEscuela=24500.00;
 		}
+		else {
+			this.maxDeducirEscuela=0.00;
+		}
 		this.colegiatura=Double.parseDouble(datos[13]);	
 		this.results[1]=new String[12];
 		this.llenaArreglo();
@@ -50,8 +53,12 @@ public class Deduccion extends Persona{
 	}
 	
 	private double calculaDeduccionPermitida() {
-		return (super.getSueldoAnual()+super.getAguinaldo()+super.getPrimaVacacional())*.1+
-				this.subcuentaRetiro;
+		double deducciones=this.calculaTotalDeducciones();
+		double ingresos=(super.getSueldoAnual()+super.getAguinaldo()+super.getPrimaVacacional())*.1;
+		if(ingresos<deducciones) {
+			return ingresos+this.subcuentaRetiro;
+		}
+		return deducciones+this.subcuentaRetiro;
 	}
 	
 	public double getDeduccionPermitida() {

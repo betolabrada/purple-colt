@@ -5,7 +5,7 @@ public class Persona {
 	private double sueldoMensual;
 	private double aguinaldo;
 	private double primaVacacional;
-	private static final double primaVacacionalExenta=1200.60;
+	private static final double primaVacacionalExenta=1209.0;
 	
 	protected String[][] results;
 	
@@ -27,17 +27,22 @@ public class Persona {
 	}
 	
 	private double calculaAguinaldoExento() {
-		double dias=this.aguinaldo/(this.sueldoMensual/30);
-		double aguinaldoExento=this.sueldoMensual/30*15;
-		return aguinaldoExento;
+		return this.sueldoMensual/30*15;
 	}
 	
 	private double calculaAguinaldoGravado() {
-		return this.aguinaldo-this.calculaAguinaldoExento();
+		double dias=this.aguinaldo/(this.sueldoMensual/30);
+		if(dias>=15) {
+			return this.aguinaldo-this.calculaAguinaldoExento();
+		}
+		return 0.0;
 	}
 	
 	private double calculaPrimaVacacionalGravada() {
-		return this.primaVacacional-primaVacacionalExenta;
+		if(this.primaVacacional>=primaVacacionalExenta) {
+			return this.primaVacacional-primaVacacionalExenta;
+		}
+		return 0.0;
 	}
 	
 	public double getIngresosTotalesGravados() {

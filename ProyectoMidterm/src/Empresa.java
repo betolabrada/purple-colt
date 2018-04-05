@@ -8,13 +8,13 @@ import java.io.PrintWriter;
 import javax.swing.JOptionPane;
 
 public class Empresa {
-	private String path;	
-	private Persona[] empleados;
+	private String path;
+	private ISR[] empleados;
 	
-	
+		
 	public Empresa(String path) {
 		this.path=path;
-		this.empleados=new Persona[this.getRows()];
+		this.empleados=new ISR[this.countRows()];
 		try {
 			BufferedReader bf=new BufferedReader(new FileReader(this.path));
 			PrintWriter pw=new PrintWriter(new FileWriter("C:\\Users\\alber\\Documents\\Proyecto_MT_files\\results.csv"));
@@ -27,8 +27,7 @@ public class Empresa {
 						
 			while((line=bf.readLine())!=null) {
 				this.empleados[c]=new ISR(line.split(","));
-				pw.println(this.empleados[c]);
-				c++;
+				pw.println(this.empleados[c++]);
 			}
 			
 			JOptionPane.showMessageDialog(null, "Tu archivo se ha creado exitosamente");
@@ -41,7 +40,7 @@ public class Empresa {
 		}
 	}
 	
-	public int getRows() {
+	private int countRows() {
 		int c=0;
 
 		try {

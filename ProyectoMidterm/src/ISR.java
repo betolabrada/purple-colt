@@ -1,9 +1,7 @@
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 import javax.swing.JOptionPane;
 
@@ -12,13 +10,14 @@ public class ISR extends Deduccion{
 	private final double[][] tablaCuotas;
 	
 	private double[] fila; // 0: limite inferior | 1: limite superior | 2: cuota fija | 3: porcentaje excedente
-	
+		
 	
 	public ISR(String[] datos) {
 		super(datos);
 		
 		this.tablaCuotas=new double[11][4];
 		this.fila=new double[4];
+		
 		try {
 			BufferedReader bf = new BufferedReader(new FileReader("Proyecto_MT_files\\tablacuotas3.csv"));
 			String line;
@@ -31,14 +30,16 @@ public class ISR extends Deduccion{
 				}
 				c++;
 			}
-			bf.close();
-
-			
+			bf.close();		
 		}catch(FileNotFoundException ex) {
 			JOptionPane.showMessageDialog(null, "No se ha encontrado archivo de cuotas");
+			ex.printStackTrace();
 		}catch(IOException ex) {
-			JOptionPane.showMessageDialog(null, "Ha ocurrido un error halloween");
+			JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
+			ex.printStackTrace();
 		}
+		
+		//recorre fila del primero al penúltimo
 		for(int i=0; i<this.tablaCuotas.length-1; i++) {
 			if(this.tablaCuotas[i][0]<this.calculaISR() && this.tablaCuotas[i][1]>=this.calculaISR()) {
 				for(int j=0; j<this.fila.length; j++) {
@@ -47,6 +48,8 @@ public class ISR extends Deduccion{
 				break;
 			}
 		}
+		
+		//recorre última fila
 		int last=this.tablaCuotas.length-1;
 		if(this.tablaCuotas[last][0]<this.calculaISR()) {
 			this.fila=this.tablaCuotas[last];
