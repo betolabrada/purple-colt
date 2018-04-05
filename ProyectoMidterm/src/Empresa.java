@@ -9,12 +9,12 @@ import javax.swing.JOptionPane;
 
 public class Empresa {
 	private String path;
-	private ISR[] empleados;
+	private Persona[] empleados;
 	
 		
 	public Empresa(String path) {
 		this.path=path;
-		this.empleados=new ISR[this.countRows()];
+		this.empleados=new Persona[this.countRows()];
 		try {
 			BufferedReader bf=new BufferedReader(new FileReader(this.path));
 			PrintWriter pw=new PrintWriter(new FileWriter("C:\\Users\\alber\\Documents\\Proyecto_MT_files\\results.csv"));
@@ -26,7 +26,7 @@ public class Empresa {
 					+ "Cuota fija,Porcentaje excedente,Pago excedente,Total a pagar");
 						
 			while((line=bf.readLine())!=null) {
-				this.empleados[c]=new ISR(line.split(","));
+				this.empleados[c]=new Persona(line.split(","));
 				pw.println(this.empleados[c++]);
 			}
 			
