@@ -9,21 +9,20 @@ import javax.swing.JOptionPane;
 
 public class Empresa {
 	private String pathEntry;
-	private String pathSave;
 	private Persona[] empleados;
 	
 		
-	public Empresa(String path) {
-		this.pathEntry=path;
+	public Empresa(String pathEntry) {
+		this.pathEntry=pathEntry;
 		this.empleados=new Persona[this.cuentaEmpleados()];
 		
 	}
 	
 	//Con el siguiente método se obtendrán los resultados en un archivo csv de una "empresa" (archivo con muchas líneas de empleados)
-	public void generaReporte() {
+	public void generaReporte(String pathSave) {
 		try {
 			BufferedReader bf=new BufferedReader(new FileReader(this.pathEntry));
-			PrintWriter pw=new PrintWriter(new FileWriter("C:\\Users\\alber\\Documents\\Proyecto_MT_files\\results.csv"));
+			PrintWriter pw=new PrintWriter(new FileWriter(pathSave+".csv"));
 			String line;
 			int c=0;
 			pw.println("Nombre,RFC,Sueldo mensual,Ingreso anual,Aguinaldo,Aguinaldo exento,Aguinaldo gravado,Prima vacacional,Prima Vacacional exenta,Prima vacacional gravada,"

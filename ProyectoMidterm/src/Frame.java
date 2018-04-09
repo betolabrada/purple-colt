@@ -1,4 +1,3 @@
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -76,8 +75,12 @@ public class Frame extends javax.swing.JFrame {
         		JFileChooser fc=new JFileChooser();
         		try{
 	    			fc.showSaveDialog(Frame.this);
-	    			pathSave = fc.getSelectedFile().getPath();
-	    			Empresa e1 = new Empresa(pathSave);
+	    			String pathEntry = fc.getSelectedFile().getPath();
+	    			Empresa e1 = new Empresa(pathEntry);
+	    			JOptionPane.showMessageDialog(Frame.this, "Ahora selecciona donde quieras guardar el archivo");
+	    			fc.showSaveDialog(Frame.this);
+	    			String pathSave = fc.getSelectedFile().getPath();
+	    			e1.generaReporte(pathSave);
         		}catch(NullPointerException ex) {}
         	}
         });
@@ -241,14 +244,14 @@ public class Frame extends javax.swing.JFrame {
         jButton3.addActionListener(new java.awt.event.ActionListener(){
         	JFileChooser fc;
         	public void actionPerformed(ActionEvent e) {
-        		if(jTextField1.getText().length()!=0)
+        		if(jLabel3.getText().length()!=0)
         			 fc=new JFileChooser();
         		else {
         			JOptionPane.showMessageDialog(null,"No has ingresado datos aún");
         		}
         		try{
 	    			fc.showSaveDialog(Frame.this);
-	    			pathSave = fc.getSelectedFile().getPath();
+	    			String pathSave = fc.getSelectedFile().getPath();
 	    			Frame.this.persona.generaReporte(pathSave);
         		}catch(NullPointerException ex) {}
         		catch(Exception ex) {}
@@ -648,8 +651,6 @@ public class Frame extends javax.swing.JFrame {
     private javax.swing.JLabel primaVacacional;
     private javax.swing.JLabel sueldoMensual;
     private javax.swing.JLabel tEscolar;
-    private String pathSave;
-    private String [] datos;
     private Persona persona;
     // End of variables declaration                   
 
