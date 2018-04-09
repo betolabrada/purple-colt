@@ -14,7 +14,7 @@ public class Empresa {
 		
 	public Empresa(String path) {
 		this.path=path;
-		this.empleados=new Persona[this.countRows()];
+		this.empleados=new Persona[this.cuentaEmpleados()];
 		try {
 			BufferedReader bf=new BufferedReader(new FileReader(this.path));
 			PrintWriter pw=new PrintWriter(new FileWriter("C:\\Users\\alber\\Documents\\Proyecto_MT_files\\results.csv"));
@@ -40,7 +40,7 @@ public class Empresa {
 		}
 	}
 	
-	private int countRows() {
+	private int cuentaEmpleados() {
 		int c=0;
 
 		try {
@@ -60,6 +60,8 @@ public class Empresa {
 		}
 		return c;
 	}
+	
+
 	
 	
 }

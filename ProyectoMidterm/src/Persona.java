@@ -1,7 +1,9 @@
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.swing.JOptionPane;
 
@@ -146,13 +148,30 @@ public class Persona {
 		this.results[22]=Double.toString(this.calculaDeduccionPermitida());
 
 		this.results[23]=Double.toString(this.calculaISR());
-		this.results[24]=Double.toString(this.filaRango[2]);
-		this.results[25]=Double.toString(this.filaRango[3]);
+		this.results[24]=Double.toString(this.filaRango[2]); // 2: Cuota Fija
+		this.results[25]=Double.toString(this.filaRango[3]); // 3: Porcentaje Excedente
 		this.results[26]=Double.toString(this.calculaPagoExcedente());
 		this.results[27]=Double.toString(this.calculaTotalAPagar());
 		
 		
 		return this.results;
+	}
+	
+	public void generaReporte(Persona empleado) {
+		try {
+			PrintWriter pw=new PrintWriter(new FileWriter("C:\\Users\\alber\\Documents\\Proyecto_MT_files\\results.csv"));
+			pw.println("Nombre,RFC,Sueldo mensual,Ingreso anual,Aguinaldo,Aguinaldo exento,Aguinaldo gravado,Prima vacacional,Prima Vacacional exenta,Prima vacacional gravada,"
+					+ "Total ingresos gravados,Medicos y hospitales,Gastos funerarios,SGMM,Hipotecarios,Donativos,Subcuenta retiro,Transporte escolar,"
+					+ "Nivel educativo,Maximo a deducir colegiatura,Colegiatura pagada,Total deducciones (sin retiro),Deduccion permitida 10%,Monto ISR,"
+					+ "Cuota fija,Porcentaje excedente,Pago excedente,Total a pagar");
+						
+			pw.println(empleado);
+			
+			JOptionPane.showMessageDialog(null, "Tu archivo se ha creado exitosamente");
+			pw.close();
+		}catch(IOException ex) {
+			JOptionPane.showMessageDialog(null, "Error al leer el archivo");
+		}
 	}
 	
 	public String toString() {
