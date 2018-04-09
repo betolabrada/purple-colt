@@ -3,12 +3,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 public class Frame extends javax.swing.JFrame {
 
     /**
      * Creates new form Frame
      */
     public Frame() {
+    	super("Calcula tu ISR");
         initComponents();
     }
 
@@ -74,8 +76,8 @@ public class Frame extends javax.swing.JFrame {
         		JFileChooser fc=new JFileChooser();
         		try{
 	    			fc.showSaveDialog(Frame.this);
-	    			path = fc.getSelectedFile().getPath();
-	    			Empresa e1 = new Empresa(path);
+	    			pathSave = fc.getSelectedFile().getPath();
+	    			Empresa e1 = new Empresa(pathSave);
         		}catch(NullPointerException ex) {}
         	}
         });
@@ -209,13 +211,13 @@ public class Frame extends javax.swing.JFrame {
         jButton2.setText("Calcular");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	Persona p=new Persona(Frame.this.llenaDatos());
-    			jLabel3.setText(jLabel3.getText()+" "+p.results[21]);
-    			jLabel4.setText(jLabel4.getText()+" "+p.results[22]);
-    			jLabel5.setText(jLabel5.getText()+" "+p.results[23]);
-    			jLabel6.setText(jLabel6.getText()+" "+p.results[24]);
-    			jLabel7.setText(jLabel7.getText()+" "+p.results[27]);
-    			jLabel8.setText(jLabel8.getText()+" "+p.results[26]);
+            	Frame.this.persona=new Persona(Frame.this.llenaDatos());
+    			jLabel3.setText(jLabel3.getText()+" "+Frame.this.persona.results[21]);
+    			jLabel4.setText(jLabel4.getText()+" "+Frame.this.persona.results[22]);
+    			jLabel5.setText(jLabel5.getText()+" "+Frame.this.persona.results[23]);
+    			jLabel6.setText(jLabel6.getText()+" "+Frame.this.persona.results[24]);
+    			jLabel7.setText(jLabel7.getText()+" "+Frame.this.persona.results[27]);
+    			jLabel8.setText(jLabel8.getText()+" "+Frame.this.persona.results[26]);
             }
         });
 
@@ -237,13 +239,19 @@ public class Frame extends javax.swing.JFrame {
 
         jButton3.setText("Guardar");
         jButton3.addActionListener(new java.awt.event.ActionListener(){
+        	JFileChooser fc;
         	public void actionPerformed(ActionEvent e) {
-        		JFileChooser fc =new JFileChooser();
+        		if(jTextField1.getText().length()!=0)
+        			 fc=new JFileChooser();
+        		else {
+        			JOptionPane.showMessageDialog(null,"No has ingresado datos aún");
+        		}
         		try{
 	    			fc.showSaveDialog(Frame.this);
-	    			path = fc.getSelectedFile().getPath();
-	    			Empresa e2 = new Empresa(path);
+	    			pathSave = fc.getSelectedFile().getPath();
+	    			Frame.this.persona.generaReporte(pathSave);
         		}catch(NullPointerException ex) {}
+        		catch(Exception ex) {}
         	}
         });
 
@@ -640,8 +648,9 @@ public class Frame extends javax.swing.JFrame {
     private javax.swing.JLabel primaVacacional;
     private javax.swing.JLabel sueldoMensual;
     private javax.swing.JLabel tEscolar;
-    private String path;
+    private String pathSave;
     private String [] datos;
+    private Persona persona;
     // End of variables declaration                   
 
     

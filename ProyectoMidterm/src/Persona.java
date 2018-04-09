@@ -157,7 +157,7 @@ public class Persona {
 		return this.results;
 	}
 	
-	public void generaReporte(Persona empleado) {
+	public void generaReporte(String pathSave) {
 		try {
 			PrintWriter pw=new PrintWriter(new FileWriter("C:\\Users\\alber\\Documents\\Proyecto_MT_files\\results.csv"));
 			pw.println("Nombre,RFC,Sueldo mensual,Ingreso anual,Aguinaldo,Aguinaldo exento,Aguinaldo gravado,Prima vacacional,Prima Vacacional exenta,Prima vacacional gravada,"
@@ -165,7 +165,7 @@ public class Persona {
 					+ "Nivel educativo,Maximo a deducir colegiatura,Colegiatura pagada,Total deducciones (sin retiro),Deduccion permitida 10%,Monto ISR,"
 					+ "Cuota fija,Porcentaje excedente,Pago excedente,Total a pagar");
 						
-			pw.println(empleado);
+			pw.println(this);
 			
 			JOptionPane.showMessageDialog(null, "Tu archivo se ha creado exitosamente");
 			pw.close();
