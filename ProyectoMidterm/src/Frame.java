@@ -1,29 +1,14 @@
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+public class Frame extends javax.swing.JFrame {
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
-/**
- *
- * @author santiagoaragon
- */
-public class Frame extends JFrame {
-    
     /**
      * Creates new form Frame
      */
     public Frame() {
-    	super("Calcula tu ISR");
         initComponents();
     }
 
@@ -69,17 +54,17 @@ public class Frame extends JFrame {
         jTextField13 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
-        jLabel2 = new javax.swing.JLabel(); //Resultados
-        jLabel3 = new javax.swing.JLabel(); //
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 620));
 
         jLabel1.setText("Calculo ISR con Archivo");
 
@@ -94,7 +79,6 @@ public class Frame extends JFrame {
         		}catch(NullPointerException ex) {}
         	}
         });
-        
 
         Nombre.setText("Nombre:");
 
@@ -126,6 +110,11 @@ public class Frame extends JFrame {
         Aguinaldo.setText("Aguinaldo:");
 
         jTextField4.setColumns(15);
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
 
         primaVacacional.setText("Prima Vacacional:");
 
@@ -157,10 +146,20 @@ public class Frame extends JFrame {
         gastosMedicosMayores.setText("GM Mayores:");
 
         jTextField8.setColumns(12);
+        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField8ActionPerformed(evt);
+            }
+        });
 
         Hipoteca.setText("Hipoteca:");
 
         jTextField9.setColumns(12);
+        jTextField9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField9ActionPerformed(evt);
+            }
+        });
 
         Donativos.setText("Donativos:");
 
@@ -174,14 +173,29 @@ public class Frame extends JFrame {
         aportacionesRetiro.setText("Aportaciones retiro:");
 
         jTextField11.setColumns(10);
+        jTextField11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField11ActionPerformed(evt);
+            }
+        });
 
         tEscolar.setText("Transporte Escolar:");
 
         jTextField12.setColumns(10);
+        jTextField12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField12ActionPerformed(evt);
+            }
+        });
 
         nEscolar.setText("Nivel Escolar:");
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Primaria", "Secundaria", "Preparatoria", " " }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
 
         colegiatura.setText("Colegiatura:");
 
@@ -200,9 +214,8 @@ public class Frame extends JFrame {
     			jLabel4.setText(jLabel4.getText()+" "+p.results[22]);
     			jLabel5.setText(jLabel5.getText()+" "+p.results[23]);
     			jLabel6.setText(jLabel6.getText()+" "+p.results[24]);
-    			jLabel7.setText(jLabel7.getText()+" "+p.results[25]);
+    			jLabel7.setText(jLabel7.getText()+" "+p.results[27]);
     			jLabel8.setText(jLabel8.getText()+" "+p.results[26]);
-    			jLabel9.setText(jLabel9.getText()+" "+p.results[27]);
             }
         });
 
@@ -216,11 +229,23 @@ public class Frame extends JFrame {
 
         jLabel6.setText("Cuota Fija:");
 
-        jLabel7.setText("Porcentaje Excedente:");
+        jLabel7.setText("Total a pagar:");
 
         jLabel8.setText("Pago Excedente:");
 
-        jLabel9.setText("Total a pagar:");
+        
+
+        jButton3.setText("Guardar");
+        jButton3.addActionListener(new java.awt.event.ActionListener(){
+        	public void actionPerformed(ActionEvent e) {
+        		JFileChooser fc =new JFileChooser();
+        		try{
+	    			fc.showSaveDialog(Frame.this);
+	    			path = fc.getSelectedFile().getPath();
+	    			Empresa e2 = new Empresa(path);
+        		}catch(NullPointerException ex) {}
+        	}
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -242,12 +267,6 @@ public class Frame extends JFrame {
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(primaVacacional)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(tEscolar))
-                                    .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(gastosFunerarios)
                                             .addGroup(layout.createSequentialGroup()
@@ -263,12 +282,22 @@ public class Frame extends JFrame {
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(nEscolar)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(122, 122, 122)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(primaVacacional)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(116, 116, 116)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(tEscolar)))))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -329,7 +358,7 @@ public class Frame extends JFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel8)
                                             .addComponent(jLabel7))))))
-                        .addGap(0, 361, Short.MAX_VALUE)))
+                        .addGap(0, 64, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -390,7 +419,9 @@ public class Frame extends JFrame {
                     .addComponent(nEscolar)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -453,59 +484,33 @@ public class Frame extends JFrame {
         // TODO add your handling code here:
     }                                        
 
-    /**
-     * @param args the command line arguments
-     */
-    
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+    }                                           
 
-    // Variables declaration - do not modify                     
-    private javax.swing.JLabel Aguinaldo;
-    private javax.swing.JLabel Donativos;
-    private javax.swing.JLabel Hipoteca;
-    private javax.swing.JLabel Nombre;
-    private javax.swing.JLabel RFC;
-    private javax.swing.JLabel aportacionesRetiro;
-    private javax.swing.JLabel colegiatura;
-    private javax.swing.JLabel gastosFunerarios;
-    private javax.swing.JLabel gastosMedicos;
-    private javax.swing.JLabel gastosMedicosMayores;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
-    private javax.swing.JLabel nEscolar;
-    private javax.swing.JLabel primaVacacional;
-    private javax.swing.JLabel sueldoMensual;
-    private javax.swing.JLabel tEscolar;
-    private String path;
-   
-    
-    public String getPath() {
-		return path;
-	}
+    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+    }                                           
+
+    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+    }                                           
+
+    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        // TODO add your handling code here:
+    }                                            
+
+    private void jTextField12ActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        // TODO add your handling code here:
+    }                                            
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+    }                                          
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+    }
     
     private String[] llenaDatos() {
     	String[] datos=new String[14];
@@ -591,7 +596,53 @@ public class Frame extends JFrame {
 		return datos;
 		
     }
-	
-	
-	
+
+    // Variables declaration - do not modify                     
+    private javax.swing.JLabel Aguinaldo;
+    private javax.swing.JLabel Donativos;
+    private javax.swing.JLabel Hipoteca;
+    private javax.swing.JLabel Nombre;
+    private javax.swing.JLabel RFC;
+    private javax.swing.JLabel aportacionesRetiro;
+    private javax.swing.JLabel colegiatura;
+    private javax.swing.JLabel gastosFunerarios;
+    private javax.swing.JLabel gastosMedicos;
+    private javax.swing.JLabel gastosMedicosMayores;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField10;
+    private javax.swing.JTextField jTextField11;
+    private javax.swing.JTextField jTextField12;
+    private javax.swing.JTextField jTextField13;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField jTextField9;
+    private javax.swing.JLabel nEscolar;
+    private javax.swing.JLabel primaVacacional;
+    private javax.swing.JLabel sueldoMensual;
+    private javax.swing.JLabel tEscolar;
+    private String path;
+    private String [] datos;
+    // End of variables declaration                   
+
+    
 }

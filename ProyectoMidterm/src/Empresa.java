@@ -8,15 +8,21 @@ import java.io.PrintWriter;
 import javax.swing.JOptionPane;
 
 public class Empresa {
-	private String path;
+	private String pathEntry;
+	private String pathSave;
 	private Persona[] empleados;
 	
 		
 	public Empresa(String path) {
-		this.path=path;
+		this.pathEntry=path;
 		this.empleados=new Persona[this.cuentaEmpleados()];
+		
+	}
+	
+	//Con el siguiente método se obtendrán los resultados en un archivo csv de una "empresa" (archivo con muchas líneas de empleados)
+	public void generaReporte() {
 		try {
-			BufferedReader bf=new BufferedReader(new FileReader(this.path));
+			BufferedReader bf=new BufferedReader(new FileReader(this.pathEntry));
 			PrintWriter pw=new PrintWriter(new FileWriter("C:\\Users\\alber\\Documents\\Proyecto_MT_files\\results.csv"));
 			String line;
 			int c=0;
@@ -44,7 +50,7 @@ public class Empresa {
 		int c=0;
 
 		try {
-			BufferedReader bf=new BufferedReader(new FileReader(this.path));
+			BufferedReader bf=new BufferedReader(new FileReader(this.pathEntry));
 			String line;
 						
 			while((line=bf.readLine())!=null) {
