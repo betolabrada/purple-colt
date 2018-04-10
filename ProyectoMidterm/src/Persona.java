@@ -13,7 +13,8 @@ public class Persona {
 	private double sueldoMensual;
 	private double aguinaldo;
 	private double primaVacacional;
-	private static final double primaVacacionalExenta=1209.0;	
+	private static final double primaVacacionalExenta=1209.0;
+	private static final String cuotasPath="Proyecto_MT_files\\tablacuotas3.csv"; //Archivo csv de tabla de rangos ISR
 	
 	private Deduccion deduccion;
 	
@@ -92,7 +93,7 @@ public class Persona {
 		double[][] tablaCuotas=new double[11][4];
 		double[] fila=new double[4];
 		try {
-			BufferedReader bf = new BufferedReader(new FileReader("Proyecto_MT_files\\tablacuotas3.csv"));
+			BufferedReader bf = new BufferedReader(new FileReader(cuotasPath));
 			String line;
 			int c=0;
 			

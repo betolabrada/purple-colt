@@ -1,16 +1,23 @@
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author santiagoaragon
+ */
 public class Frame extends javax.swing.JFrame {
 
     /**
      * Creates new form Frame
      */
     public Frame() {
-    	super("Calcula tu ISR");
+    		this.datos = new String[14];
         initComponents();
+        setPreferredSize(new Dimension(1000,600));
     }
 
     /**
@@ -62,22 +69,22 @@ public class Frame extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Calculo ISR con Archivo");
 
         jButton1.setText("Seleccione un archivo");
-        jButton1.addActionListener(new ActionListener() {
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		JFileChooser fc=new JFileChooser();
         		try{
 	    			fc.showSaveDialog(Frame.this);
 	    			String pathEntry = fc.getSelectedFile().getPath();
 	    			Empresa e1 = new Empresa(pathEntry);
-	    			JOptionPane.showMessageDialog(Frame.this, "Ahora selecciona donde quieras guardar el archivo");
+	    			JOptionPane.showMessageDialog(Frame.this,"Ahora seleccione donde desea guardar el archivo" );
 	    			fc.showSaveDialog(Frame.this);
 	    			String pathSave = fc.getSelectedFile().getPath();
 	    			e1.generaReporte(pathSave);
@@ -213,8 +220,8 @@ public class Frame extends javax.swing.JFrame {
 
         jButton2.setText("Calcular");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	Frame.this.persona=new Persona(Frame.this.llenaDatos());
+        	public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	Frame.this.persona = new Persona(Frame.this.llenaDatos());
     			jLabel3.setText(jLabel3.getText()+" "+Frame.this.persona.results[21]);
     			jLabel4.setText(jLabel4.getText()+" "+Frame.this.persona.results[22]);
     			jLabel5.setText(jLabel5.getText()+" "+Frame.this.persona.results[23]);
@@ -238,24 +245,50 @@ public class Frame extends javax.swing.JFrame {
 
         jLabel8.setText("Pago Excedente:");
 
-        
-
         jButton3.setText("Guardar");
-        jButton3.addActionListener(new java.awt.event.ActionListener(){
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
         	JFileChooser fc;
         	public void actionPerformed(ActionEvent e) {
-        		if(jLabel3.getText().length()!=0)
+        		if(jTextField1.getText().length()!=0)
         			 fc=new JFileChooser();
         		else {
         			JOptionPane.showMessageDialog(null,"No has ingresado datos aún");
         		}
         		try{
 	    			fc.showSaveDialog(Frame.this);
-	    			String pathSave = fc.getSelectedFile().getPath();
+	    			pathSave = fc.getSelectedFile().getPath();
 	    			Frame.this.persona.generaReporte(pathSave);
         		}catch(NullPointerException ex) {}
         		catch(Exception ex) {}
         	}
+        });
+
+        jButton4.setText("Reset");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jLabel2.setText("Resultados");
+                jLabel3.setText("Total deducciones: ");
+                jLabel4.setText("Deduccion permitida: ");
+                jLabel5.setText("Monto ISR: ");
+                jLabel6.setText("Cuota Fija: ");
+                jLabel7.setText("Total a pagar: ");
+                jLabel8.setText("Pago Excedente: ");
+                
+                jTextField1.setText("");
+                jTextField2.setText("");
+                jTextField3.setText("");
+                jTextField4.setText("");
+                jTextField5.setText("");
+                jTextField6.setText("");
+                jTextField7.setText("");
+                jTextField8.setText("");
+                jTextField9.setText("");
+                jTextField10.setText("");
+                jTextField11.setText("");
+                jTextField12.setText("");
+                jTextField13.setText("");
+                jComboBox2.setSelectedIndex(0);
+            }
         });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -302,13 +335,15 @@ public class Frame extends javax.swing.JFrame {
                                                 .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGap(116, 116, 116)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(tEscolar)))))
+                                        .addComponent(tEscolar))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(76, 76, 76)
+                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(64, 64, 64)
+                                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -369,12 +404,8 @@ public class Frame extends javax.swing.JFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel8)
                                             .addComponent(jLabel7))))))
-                        .addGap(0, 64, Short.MAX_VALUE)))
+                        .addGap(0, 51, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -432,7 +463,8 @@ public class Frame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -447,9 +479,7 @@ public class Frame extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jLabel6)
                     .addComponent(jLabel8))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel9)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
@@ -521,7 +551,60 @@ public class Frame extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    }
+    }                                        
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+    }                                        
+
+
+    // Variables declaration - do not modify                     
+    private javax.swing.JLabel Aguinaldo;
+    private javax.swing.JLabel Donativos;
+    private javax.swing.JLabel Hipoteca;
+    private javax.swing.JLabel Nombre;
+    private javax.swing.JLabel RFC;
+    private javax.swing.JLabel aportacionesRetiro;
+    private javax.swing.JLabel colegiatura;
+    private javax.swing.JLabel gastosFunerarios;
+    private javax.swing.JLabel gastosMedicos;
+    private javax.swing.JLabel gastosMedicosMayores;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField10;
+    private javax.swing.JTextField jTextField11;
+    private javax.swing.JTextField jTextField12;
+    private javax.swing.JTextField jTextField13;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField jTextField9;
+    private javax.swing.JLabel nEscolar;
+    private javax.swing.JLabel primaVacacional;
+    private javax.swing.JLabel sueldoMensual;
+    private javax.swing.JLabel tEscolar;
+    private String path;
+    private String [] datos;
+    private Persona persona;
+    private String pathSave;
     
     private String[] llenaDatos() {
     	String[] datos=new String[14];
@@ -607,52 +690,4 @@ public class Frame extends javax.swing.JFrame {
 		return datos;
 		
     }
-
-    // Variables declaration - do not modify                     
-    private javax.swing.JLabel Aguinaldo;
-    private javax.swing.JLabel Donativos;
-    private javax.swing.JLabel Hipoteca;
-    private javax.swing.JLabel Nombre;
-    private javax.swing.JLabel RFC;
-    private javax.swing.JLabel aportacionesRetiro;
-    private javax.swing.JLabel colegiatura;
-    private javax.swing.JLabel gastosFunerarios;
-    private javax.swing.JLabel gastosMedicos;
-    private javax.swing.JLabel gastosMedicosMayores;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
-    private javax.swing.JLabel nEscolar;
-    private javax.swing.JLabel primaVacacional;
-    private javax.swing.JLabel sueldoMensual;
-    private javax.swing.JLabel tEscolar;
-    private Persona persona;
-    // End of variables declaration                   
-
-    
 }
